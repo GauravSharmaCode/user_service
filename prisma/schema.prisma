@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// Define Prisma Client generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define database connection
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String
+  createdAt DateTime @default(now()) // Added timestamp
+  orders    Order[] // Relation: One user can have many orders
+}
+
+// Order model
+model Order {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  product   String
+  amount    Float
+  createdAt DateTime @default(now())
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
