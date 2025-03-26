@@ -18,7 +18,7 @@ A microservice for handling user notifications with PostgreSQL and Express.js.
 
 1. Clone and setup:
 ```bash
-git clone https://github.com/yourusername/user_service.git
+git clone https://github.com/gauravsharmacode/user_service.git
 cd user_service
 npm install
 ```
